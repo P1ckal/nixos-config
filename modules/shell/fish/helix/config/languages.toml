@@ -1,0 +1,20 @@
+[language-server.uwu_colors]
+command = "uwu_colors"
+
+[[language]]
+name = "toml"
+language-servers = ["uwu_colors"]
+
+[[language]]
+name = "json"
+language-servers = ["uwu_colors"]
+
+
+[language-server.csharp-ls]
+command = "csharp-ls"
+
+[[language]]
+name = "c-sharp"
+scope = "source.cs"
+roots = ["*.sln", "*.csproj", "*.slnx"]
+language-servers = [ "csharp-ls" ]

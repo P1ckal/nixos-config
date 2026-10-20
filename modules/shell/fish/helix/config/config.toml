@@ -1,0 +1,25 @@
+theme = "carbonfox-extra"
+
+[editor.soft-wrap]
+enable = true
+wrap-indicator = ""
+#indicator-on-gutter = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error" 
+
+[keys.normal]
+"X" = ["extend_line_above"]
+"A-x" = "extend_to_line_bounds"
+# Change the *case binds around so ` cycles. Also potentially integrate with "cycle".
+# Would require rewriting cycle to take that input... might be the wrong way to do things.
+
+[keys.select]
+"X" = ["extend_line_above"]
+"A-x" = "extend_to_line_bounds"

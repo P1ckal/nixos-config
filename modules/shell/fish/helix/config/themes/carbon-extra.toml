@@ -1,0 +1,9 @@
+inherits = "carbon_git"
+
+"ui.virtual.jump-label" = { fg = "white10", modifiers = ["bold", "underlined"] }
+"ui.statusline" = { fg = "cyan10"}
+
+
+[palette]
+white10 = "#f4f4f4"
+cyan10 = "#6bcafe"
