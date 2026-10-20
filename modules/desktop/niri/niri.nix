@@ -3,7 +3,7 @@
 {
   flake.nixosModules.niri = { pkgs, ... }: {
     programs.niri.enable = true;
-    environment.systemPackages = with pkgs; [ kitty fuzzel ];
+    environment.systemPackages = with pkgs; [ kitty fuzzel xwayland-satellite ];
   };
 
   flake.modules.homeManager.niri = {
