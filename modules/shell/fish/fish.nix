@@ -5,7 +5,7 @@
     users.users.user01.shell = pkgs.fish;
   };
 
-  flake.modules.homeManager.fish = {
+  flake.modules.homeManager.fish = { lib, ...}: {
     programs.fish.enable = true;
     
     programs.fish.interactiveShellInit = builtins.readFile ./config/config.fish;
