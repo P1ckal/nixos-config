@@ -1,0 +1,4 @@
+[shell.session.power]
+suspend = "sudo zzz"
+reboot = "sudo reboot"
+shutdown = "sudo poweroff"

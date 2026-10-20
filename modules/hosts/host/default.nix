@@ -10,8 +10,8 @@
     modules = with self.nixosModules; [
       hostConfiguration
       system
-      niri
       home-manager
+      desktop
     ];
   };
 }

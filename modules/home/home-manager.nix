@@ -8,7 +8,7 @@
       users.user01 = {
         # The list of home pieces your user gets
         imports = with self.modules.homeManager; [
-          niri
+          desktop
         ];
         home.stateVersion = "26.05";
       };
