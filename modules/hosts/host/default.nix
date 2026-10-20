@@ -12,6 +12,7 @@
       system
       home-manager
       desktop
+      fish
     ];
   };
 }
