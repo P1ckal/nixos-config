@@ -7,6 +7,15 @@
 
   flake.modules.homeManager.fish = {
     programs.fish.enable = true;
-    programs.fish.interactiveShellInit = builtins.readFile ./config.fish;
+    
+    programs.fish.interactiveShellInit = builtins.readFile ./config/config.fish;
+
+    xdg.configFile."fish" = {
+      source = lib.cleanSourceWith {
+        src = ./config;
+        filter = path: type: baseNameOf path != "config.fish";
+      };
+      recursive = true;
+    };
   };
 }
