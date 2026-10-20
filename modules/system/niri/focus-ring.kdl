@@ -1,0 +1,11 @@
+layout{
+  focus-ring{
+    active-gradient from="#1a0f16" to="#e57399" angle=135
+  }
+
+  tab-indicator {
+    active-color   "#d90049"
+    inactive-color "#ff8cb3"
+    urgent-color   "#ff99b8"
+  }
+}
