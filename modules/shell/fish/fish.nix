@@ -2,7 +2,7 @@
 { ... }: {
   flake.nixosModules.fish = { pkgs, ... }: {
     programs.fish.enable = true;
-    users.users.user01.shell = pkgs.fish;
+    users.users.p1ckal.shell = pkgs.fish;
   };
 
   flake.modules.homeManager.fish = { lib, pkgs, ...}: {

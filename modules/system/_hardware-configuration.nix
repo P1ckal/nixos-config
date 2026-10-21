@@ -29,7 +29,7 @@
     fsType = "ext4";
   };
 
-  fileSystems."/home/user01/Tank" = {
+  fileSystems."/home/p1ckal/Tank" = {
     device = "/dev/disk/by-uuid/26739c9c-da0a-4fc3-9958-cb2d4a4eff13";
     fsType = "ext4";
     options = [
