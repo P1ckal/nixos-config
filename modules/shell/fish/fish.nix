@@ -5,10 +5,12 @@
     users.users.user01.shell = pkgs.fish;
   };
 
-  flake.modules.homeManager.fish = { lib, ...}: {
+  flake.modules.homeManager.fish = { lib, pkgs, ...}: {
     programs.fish.enable = true;
     
     programs.fish.interactiveShellInit = builtins.readFile ./config/config.fish;
+
+    home.packages = [ pkgs.zoxide pkgs.starship pkgs.direnv pkgs.devenv ];
 
     xdg.configFile."fish" = {
       source = lib.cleanSourceWith {
@@ -17,5 +19,8 @@
       };
       recursive = true;
     };
+
+    xdg.configFile."starship".source = "./starship.toml";
+    
   };
 }
