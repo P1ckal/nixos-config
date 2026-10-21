@@ -9,7 +9,7 @@
         # The list of home pieces your user gets
         imports = with self.modules.homeManager; [
           desktop
-          fish
+          shell
         ];
         home.stateVersion = "26.05";
       };

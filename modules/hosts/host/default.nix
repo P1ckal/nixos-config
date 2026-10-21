@@ -11,8 +11,8 @@
       hostConfiguration
       system
       home-manager
+      shell
       desktop
-      fish
     ];
   };
 }
