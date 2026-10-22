@@ -10,8 +10,6 @@
     
     programs.fish.interactiveShellInit = builtins.readFile ./config/config.fish;
 
-    home.packages = [ pkgs.zoxide pkgs.starship pkgs.direnv pkgs.devenv ];
-
     xdg.configFile."fish" = {
       source = lib.cleanSourceWith {
         src = ./config;
@@ -19,8 +17,5 @@
       };
       recursive = true;
     };
-
-    xdg.configFile."starship.toml".source = ./starship.toml;
-    
   };
 }

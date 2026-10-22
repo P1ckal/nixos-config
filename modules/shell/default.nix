@@ -1,15 +1,19 @@
 # modules/shell/default.nix
 { self, ... }: {
-  # Home side: everything the user gets for the desktop
-  flake.modules.homeManager.desktop = {
+  # Home side
+  flake.modules.homeManager.shell = {
     imports = with self.modules.homeManager; [
       fish
       helix
+      starship
+      zoxide
+      direnv
+      devenv
     ];
   };
 
-  # System side: only niri has a NixOS half
-  flake.nixosModules.desktop = {
+  # System side
+  flake.nixosModules.shell = {
     imports = with self.nixosModules; [
       fish
     ];
