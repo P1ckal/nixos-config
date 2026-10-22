@@ -1,8 +1,8 @@
 # modules/desktop/noctalia/noctalia.nix
 { inputs, ... }: {
-  flake.modules.homeManager.noctalia = { pkgs, ... }: {
+  flake.modules.homeManager.noctalia = { ... }: {
     imports = [
-      inputs.noctalia.nixosModules.default
+      inputs.noctalia.homeModules.default
     ];
 
     programs.noctalia = {
@@ -10,7 +10,7 @@
       systemd.enable = true;
 
       # Enables NetworkManager, Bluetooth, Upower, powerprofile stuff. Good for now but may change idk.
-      recommendedServices.enable = true;
+      # recommendedServices.enable = true;
     };
     
     #home.packages = [
