@@ -18,6 +18,7 @@
       user
       networking
       bootloader
+      kmscon
       imports
     ];
   in {
