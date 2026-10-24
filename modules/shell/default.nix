@@ -9,6 +9,7 @@
       zoxide
       direnv
       devenv
+      hyfetch
     ];
   };
 
