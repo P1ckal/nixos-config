@@ -9,6 +9,7 @@
       direnv
       devenv
       hyfetch
+      ripgrep
     ];
   };
 
@@ -16,6 +17,7 @@
   flake.nixosModules.shell = {
     imports = with self.nixosModules; [
       fish
+      lazygit
     ];
   };
 }
