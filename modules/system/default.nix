@@ -20,6 +20,7 @@
       bootloader
       kmscon
       imports
+      tlp
     ];
   in {
     imports = modules;
