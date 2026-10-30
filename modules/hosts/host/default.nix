@@ -13,6 +13,7 @@
       home-manager
       shell
       desktop
+      minecraft
     ];
   };
 }

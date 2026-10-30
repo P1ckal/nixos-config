@@ -15,6 +15,7 @@
     imports = with self.nixosModules; [
       niri
     ];
+    home-manager.sharedModules = [ self.modules.homeManager.desktop ];
     networking.networkmanager.enable = true;
     hardware.bluetooth.enable = true;
     services.upower.enable = true;

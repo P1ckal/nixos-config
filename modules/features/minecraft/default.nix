@@ -8,6 +8,7 @@
   };
 
   # System side
-  # flake.nixosModules.minecraft = {
-  # };
+  flake.nixosModules.minecraft = {
+    home-manager.sharedModules = [ self.modules.homeManager.minecraft ];
+  };
 }
