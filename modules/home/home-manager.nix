@@ -10,6 +10,7 @@
         imports = with self.modules.homeManager; [
           desktop
           shell
+          minecraft
         ];
         home.stateVersion = "26.05";
       };

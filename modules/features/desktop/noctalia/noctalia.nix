@@ -1,4 +1,3 @@
-# modules/desktop/noctalia/noctalia.nix
 { inputs, ... }: {
   flake.modules.homeManager.noctalia = { ... }: {
     imports = [
