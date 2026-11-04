@@ -8,6 +8,8 @@
     zramSwap.enable = true;
     hardware.enableRedistributableFirmware = true;
     hardware.graphics.enable = true;
+
+    services.fprintd.enable = true;
     # Normal nix code within module, add git to systemPackages
     environment.systemPackages = with pkgs; [
       git
