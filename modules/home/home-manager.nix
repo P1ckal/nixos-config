@@ -5,7 +5,7 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      users.p1ckal.home.stateVersion = "26.05";
+      users.sevyn.home.stateVersion = "26.05";
     };
   };
 }

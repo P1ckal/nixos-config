@@ -5,7 +5,7 @@
   ...
 }: {
 	# Define nixosConfiguration with hostname "host"
-  flake.nixosConfigurations.host = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.framework13pro = inputs.nixpkgs.lib.nixosSystem {
 		# Define modules to import
     modules = with self.nixosModules; [
       hostConfiguration

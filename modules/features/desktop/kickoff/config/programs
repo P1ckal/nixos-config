@@ -27,4 +27,4 @@ Musescore = MuseScore-Studio
 Godot = godot
 Silent Circuit = prime-run ~/Unity/Hub/Editor/6000.3.10f1/Editor/Unity -projectPath ~/Projects/SilentCircuit
 MatLab = matlab -desktop
-Celeste = /home/p1ckal/.local/share/Steam/steamapps/common/Celeste/Celeste
+Celeste = ~/.local/share/Steam/steamapps/common/Celeste/Celeste

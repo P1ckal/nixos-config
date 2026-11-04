@@ -374,7 +374,7 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "autoStartAuth": false,
-        "avatarImage": "/home/p1ckal/.face",
+        "avatarImage": "/home/sevyn/.face",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
         "clockStyle": "custom",
@@ -697,7 +697,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/p1ckal/Pictures/Wallpapers",
+        "directory": "/home/sevyn/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
