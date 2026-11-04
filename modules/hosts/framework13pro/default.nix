@@ -15,6 +15,7 @@
       shell
       desktop
       minecraft
+      java-dev
     ];
   };
 }

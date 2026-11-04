@@ -13,6 +13,7 @@
     services.ntp.enable = true;
     time.timeZone = "EST5EDT";
     time.hardwareClockInLocalTime = true;
+    nixpkgs.config.allowUnfree = true;
     # Normal nix code within module, add git to systemPackages
     environment.systemPackages = with pkgs; [
       git
