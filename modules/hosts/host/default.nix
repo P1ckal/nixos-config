@@ -9,6 +9,7 @@
 		# Define modules to import
     modules = with self.nixosModules; [
       hostConfiguration
+      hostDisk
       system
       home-manager
       shell

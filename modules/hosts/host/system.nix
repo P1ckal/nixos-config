@@ -1,6 +1,13 @@
 {...}: {
   # Define flake part nixosModule "hostConfiguration" and pass in arch specific pkgs
   flake.nixosModules.hostConfiguration = {pkgs, ...}: {
+    imports = [./_hardware-configuration.nix];
+    networking.hostName = "nixosfixesthis";
+    system.stateVersion = "26.05";
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    zramSwap.enable = true;
+    hardware.enableRedistributableFirmware = true;
+    hardware.graphics.enable = true;
     # Normal nix code within module, add git to systemPackages
     environment.systemPackages = with pkgs; [
       git

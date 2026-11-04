@@ -11,10 +11,9 @@
           canTouchEfiVariables = true;
         };
         # Enable grub
-        grub = {
-          efiSupport = true;
-          # Fix resolution issues
-          device = "nodev";
+        systemd-boot = {
+          enable = true;
+          configurationLimit = 10;
         };
       };
 

@@ -19,7 +19,6 @@
       networking
       bootloader
       kmscon
-      imports
       tlp
     ];
   in {
