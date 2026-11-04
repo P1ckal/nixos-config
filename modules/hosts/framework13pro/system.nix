@@ -10,6 +10,7 @@
     hardware.graphics.enable = true;
 
     services.fprintd.enable = true;
+    services.ntp.enable = true;
     # Normal nix code within module, add git to systemPackages
     environment.systemPackages = with pkgs; [
       git
