@@ -6,6 +6,7 @@
       kitty
       kickoff
       noctalia
+      zen-browser
     ];
     
   };
