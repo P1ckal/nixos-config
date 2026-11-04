@@ -1,12 +1,12 @@
 { inputs, ... }: {
   flake.nixosModules.hostDisk = { lib, ...}: let
-    resumeOffset = null;
+    resumeOffset = 533760;
   in {
     imports = [ inputs.disko.nixosModules.disko ];
 
     disko.devices.disk.main = {
       type = "disk";
-      device = "/dev/disk/by-id/REPLACE-ME";
+      device = "/dev/disk/by-id/nvme-KLEVV_CRAS_C925G_M.2_NVMe_SSD_1TB_2026011311002358";
       content = {
         type = "gpt";
         partitions = {
