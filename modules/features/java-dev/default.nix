@@ -3,6 +3,7 @@
   flake.modules.homeManager.java-dev = {
     imports = with self.modules.homeManager; [
       intellij
+      jdtls
     ];
   };
 
