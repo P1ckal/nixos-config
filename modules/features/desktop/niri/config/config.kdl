@@ -111,7 +111,7 @@ cursor {
     // Change the Includes in ~/.icons/default/index.theme
     // if you wanna change the cursor
     xcursor-theme "default"
-    xcursor-size 24
+    xcursor-size 48
 }
 
 // Settings that influence how windows are positioned and sized.
