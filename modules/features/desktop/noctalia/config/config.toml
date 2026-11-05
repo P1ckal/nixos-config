@@ -28,7 +28,7 @@ widget_order = []
     [desktop_widgets.widget]
 
 [hooks]
-started = "kitty --start-as=hidden --listen-on=unix:@kitty && kitty --hold hx ~/Documents/todo.txt"
+started = "kitty --start-as=hidden --listen-on=unix:@kitty"
 
 [lockscreen]
 fingerprint = false
