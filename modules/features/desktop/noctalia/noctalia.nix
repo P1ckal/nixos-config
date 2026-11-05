@@ -24,7 +24,7 @@
           mode = "dark";
           source = "wallpaper";
           community-palette = "Rosey AMOLED";
-          wallpaper_scheme = "m3-tonal-spot";
+          wallpaper_scheme = "soft";
 
           templates = {
             builtin_ids = [ "btop" "cava" "gtk3" "gtk4" "kitty" "niri" "qt" ];
@@ -43,6 +43,7 @@
           calendar = {
             enabled = true;
             account.personal_google.type = "google";
+            account.personal_google.color = "primary";
           };
 
           lockscreen.fingerprint = true;
