@@ -8,16 +8,62 @@
       enable = true;
       systemd.enable = true;
 
-      # Enables NetworkManager, Bluetooth, Upower, powerprofile stuff. Good for now but may change idk.
-      # recommendedServices.enable = true;
+      settings = {
+        hooks.started = "kitty --start-as=hidden --listen-on=unix:@kitty";
+
+
+        bar = {
+          default = {
+            auto_hide = true;
+            reserve_space = false;
+          };
+        };
+
+        theme = {
+          builtIn = "Noctalia";
+          mode = "dark";
+          source = "wallpaper";
+          community-palette = "Rosey AMOLED";
+          wallpaper_scheme = "m3-tonal-spot";
+
+          templates = {
+            builtin_ids = [ "btop" "cava" "gtk3" "gtk4" "kitty" "niri" "qt" ];
+            community_ids = [ "zen-browser" "yazi" ];
+            
+          };
+        };
+
+          wallpaper = {
+            enabled = true;
+            default.path = ./pixel_purple_wallpaper.png;
+          };
+
+          widget.clock.format = "{:%I:%M %p}";
+
+          calendar = {
+            enabled = true;
+            account.personal_google.type = "google";
+          };
+
+          lockscreen.fingerprint = true;
+
+          notification = {
+            history_retention_hours = "3";
+          };
+
+          plugins = {
+            enabled = [ "noctalia/screen_recorder" ];
+          };
+
+          
+      };
+      
+      
     };
     
-    #home.packages = [
-    #  inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    #];
-    xdg.configFile."noctalia" = {
-      source = ./config;
-      recursive = true;
-    };
+    # xdg.configFile."noctalia" = {
+    #   source = ./config;
+    #   recursive = true;
+    # };
   };
 }
