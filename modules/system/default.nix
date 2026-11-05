@@ -20,6 +20,7 @@
       bootloader
       kmscon
       tlp
+      audio
     ];
   in {
     imports = modules;

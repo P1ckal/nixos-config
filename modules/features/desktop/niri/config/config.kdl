@@ -289,7 +289,7 @@ layout {
 //spawn-at-startup "dbus-run-session" "qs" "-c" "noctalia-shell"
 // spawn-at-startup "kitty" "--start-as=hidden" "--listen-on=unix:@kitty"
 spawn-at-startup "noctalia"
-spawn-at-startup "dbus-run-session" "pipewire"
+// spawn-at-startup "dbus-run-session" "pipewire"
 // spawn-at-startup "keepassxc" "--minimized"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:

@@ -12,6 +12,9 @@
       extraGroups = [
         "wheel"
         "networkmanager"
+        "audio"
+        "video"
+        "pipewire"
       ];
     };
   };
