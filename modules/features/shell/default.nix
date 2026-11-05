@@ -10,6 +10,7 @@
       devenv
       hyfetch
       ripgrep
+      yazi
     ];
   };
 
