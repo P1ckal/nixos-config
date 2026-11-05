@@ -16,6 +16,7 @@
       desktop
       minecraft
       java-dev
+      nix-dev
     ];
   };
 }
