@@ -7,6 +7,7 @@
       kickoff
       noctalia
       zen-browser
+      discord
     ];
     
   };
