@@ -85,6 +85,29 @@
             isEssential = true;
           };
         };
+
+        search = {
+          force = true;
+          default = "google";
+          engines = {
+            minecraft = {
+              name = "Minecraft Wiki";
+              definedAliases = ["@mc"];
+              icon = ./icons/MinecraftWiki.webp;
+              urls = [
+                {
+                  template = "https://minecraft.wiki/?search={searchTerms}";
+                  params = [
+                    {
+                      name = "query";
+                      value = "searchTerms";
+                    }
+                  ];
+                }
+              ];
+            };
+          };
+        };
       };
     };
 
