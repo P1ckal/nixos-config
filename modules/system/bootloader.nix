@@ -1,6 +1,7 @@
 {...}: {
   # Define flake part nixosModule "bootloader" and pass in pkgs
   flake.nixosModules.bootloader = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [ sbctl ];
     # Normal nix code
     boot = {
       loader = {
@@ -11,9 +12,9 @@
           canTouchEfiVariables = true;
         };
         # Enable grub
-        systemd-boot = {
+        limine = {
           enable = true;
-          configurationLimit = 10;
+          secureBoot.enable = true;
         };
       };
 
