@@ -17,6 +17,7 @@
       minecraft
       java-dev
       nix-dev
+      game-design
     ];
   };
 }
