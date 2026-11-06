@@ -1,12 +1,21 @@
 { ... }:
 {
+  flake.modules.homeManager.git = { ... }: {
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
+  };
+
+  
   flake.nixosModules.git = { pkgs, ... }: {
     programs.git.enable = true;
-    home.packages = [ pkgs.delta ];
-    services.gnome.gnome-keyring.enable = true;
+    programs.git.package = pkgs.git.override { withLibsecret = true; };
 
-    programs.git.config = [
-      {
+    services.gnome.gnome-keyring.enable = true;
+    environment.systemPackages = [ pkgs.libsecret ];
+
+    programs.git.config = {
         core = {
           pager = "delta";
         };
@@ -27,10 +36,9 @@
           verbose = "true";
         };
 
-        credential.helper = "${pkgs.git.out}/bin/git-credential-libsecret";
-        
-        
-      }
-    ];
+        credential.helper = "libsecret";
+
+      };
+    
   };
 }

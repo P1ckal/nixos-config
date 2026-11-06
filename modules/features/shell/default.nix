@@ -11,6 +11,7 @@
       hyfetch
       ripgrep
       yazi
+      git
     ];
   };
 
@@ -19,6 +20,7 @@
     imports = with self.nixosModules; [
       fish
       lazygit
+      git
     ];
     home-manager.sharedModules = [ self.modules.homeManager.shell ];
   };
