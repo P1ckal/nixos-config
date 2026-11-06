@@ -1,7 +1,11 @@
-{...}: {
+{inputs, ...}: {
   # Define flake part nixosModule "hostConfiguration" and pass in arch specific pkgs
   flake.nixosModules.hostConfiguration = {pkgs, ...}: {
-    imports = [./_hardware-configuration.nix];
+    imports = [
+      ./_hardware-configuration.nix
+      inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+    ];
+
     networking.hostName = "nixosfixesthis";
     system.stateVersion = "26.05";
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
