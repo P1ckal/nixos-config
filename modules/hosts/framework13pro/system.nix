@@ -14,7 +14,9 @@
     hardware.graphics.enable = true;
 
     services.fprintd.enable = true;
-    
+    security.pam.services.login.fprintAuth = false;
+    security.pam.services.greetd.fprintAuth = false;
+
     services.ntp.enable = true;
     time.timeZone = "EST5EDT";
     time.hardwareClockInLocalTime = true;
