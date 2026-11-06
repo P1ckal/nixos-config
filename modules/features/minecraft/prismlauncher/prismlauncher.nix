@@ -1,4 +1,3 @@
-# we'd want to use unwrapped so we can do glfw overrides
 { ... }: {
   flake.modules.homeManager.prismlauncher = { pkgs, ...}: {
     programs.prismlauncher = {

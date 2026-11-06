@@ -41,6 +41,8 @@
             wrap-indicator = "";
           };
 
+          auto-format = true;
+
           cursor-shape = {
             insert = "bar";
             normal = "block";
