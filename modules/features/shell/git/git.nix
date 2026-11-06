@@ -2,8 +2,8 @@
 {
   flake.nixosModules.git = { pkgs, ... }: {
     programs.git.enable = true;
-    programs.git.lfs.enable = true;
     home.packages = [ pkgs.delta ];
+    services.gnome.gnome-keyring.enable = true;
 
     programs.git.config = [
       {
@@ -26,6 +26,8 @@
         commit = {
           verbose = "true";
         };
+
+        credential.helper = "${pkgs.git.out}/bin/git-credential-libsecret";
         
         
       }
