@@ -406,6 +406,10 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
+    XF86AudioPlay allow-when-locked=true {spawn-sh "noctalia msg media toggle";}
+    XF86AudioPrev allow-when-locked=true {spawn-sh "noctalia msg media previous";}
+    XF86AudioNext allow-when-locked=true {spawn-sh "noctalia msg media next";}
+
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
