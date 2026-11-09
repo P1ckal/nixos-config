@@ -1,5 +1,7 @@
 { inputs, ... }: {
-  flake.modules.homeManager.zen-browser = { ... }: {
+  flake.modules.homeManager.zen-browser = { config, lib, ... }: {
+    launcher.entries."Zen" = lib.getExe config.programs.zen-browser.finalPackage;
+
     imports = [
       inputs.zen-browser.homeModules.beta
     ];
@@ -92,7 +94,7 @@
           engines = {
             minecraft = {
               name = "Minecraft Wiki";
-              definedAliases = ["@mc"];
+              definedAliases = [ "@mc" ];
               icon = ./icons/MinecraftWiki.webp;
               urls = [
                 {

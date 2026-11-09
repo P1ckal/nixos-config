@@ -390,7 +390,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "dropdown-term" ; }
-    Mod+grave repeat=false hotkey-overlay-title="Run an Application: kickoff" { spawn-sh "pkill kickoff || kickoff --from-file ~/.config/kickoff/programs --history .cache/kickoff/default.csv"; }
+    Mod+grave repeat=false hotkey-overlay-title="Run an Application: kickoff" { spawn-sh "pkill kickoff || launcher"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Delete {spawn "noctalia" "msg" "session" "lock" ; }
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
