@@ -156,7 +156,28 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",
+        "wrappers": "wrappers",
         "zen-browser": "zen-browser"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794245113,
+        "narHash": "sha256-7Z4R9zXm/sQAsc1ufOLc0Bc7DtUDZEGZS9ezf+NHgwY=",
+        "owner": "nix-community",
+        "repo": "nix-wrapper-modules",
+        "rev": "e803a445da479d319161c1c107150992028c7e7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
       }
     },
     "zen-browser": {
