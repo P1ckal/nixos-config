@@ -58,6 +58,10 @@
         };
 
       profiles.default = {
+        settings = {
+          "zen.view.experimental-no-window-controls" = true;
+        };
+
         # spacesForce = true; # delete spaces not declared
         spaces = {
           "Default" = {
