@@ -6,8 +6,6 @@
       kitty
       kickoff
       noctalia
-      zen-browser
-      discord
     ];
     
   };

@@ -14,6 +14,8 @@
       home-manager
       shell
       desktop
+      zen-browser
+      discord
       minecraft
       java-dev
       nix-dev
