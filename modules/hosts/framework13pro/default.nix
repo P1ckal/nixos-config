@@ -17,6 +17,7 @@
       zen-browser
       discord
       minecraft
+      steam
       java-dev
       nix-dev
       game-design
