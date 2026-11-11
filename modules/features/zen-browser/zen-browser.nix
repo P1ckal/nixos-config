@@ -112,6 +112,16 @@
                 }
               ];
             };
+            nix = {
+              name = "Nix Packages";
+              definedAliases = [ "@nix" ];
+              icon = ./icons/nixos-logomark-default-gradient-none.svg;
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages?channel=26.05&query={searchTerms}";
+                }
+              ];
+            };
           };
         };
       };
