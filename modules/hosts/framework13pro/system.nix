@@ -1,6 +1,6 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   # Define flake part nixosModule "hostConfiguration" and pass in arch specific pkgs
-  flake.nixosModules.hostConfiguration = {pkgs, ...}: {
+  flake.nixosModules.hostConfiguration = { pkgs, ... }: {
     imports = [
       ./_hardware-configuration.nix
       inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series3
@@ -8,8 +8,16 @@
 
     networking.hostName = "nixosfixesthis";
     system.stateVersion = "26.05";
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    zramSwap.enable = true;
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    boot.zswap = {
+      enable = true;
+      # defaults are lowkey goated icl
+    };
+
     hardware.enableRedistributableFirmware = true;
     hardware.graphics.enable = true;
 
