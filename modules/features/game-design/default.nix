@@ -3,6 +3,7 @@
   flake.modules.homeManager.game-design = {
     imports = with self.modules.homeManager; [
       godot
+      blender
     ];
   };
 
