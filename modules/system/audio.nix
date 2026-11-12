@@ -10,7 +10,6 @@
       wireplumber.enable = true;
       jack.enable = true;
 
-
     };
   };
 }
