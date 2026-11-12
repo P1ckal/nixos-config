@@ -22,6 +22,7 @@
       java-dev
       nix-dev
       game-design
+      python-dev
     ];
   };
 }
