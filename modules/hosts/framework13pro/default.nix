@@ -12,6 +12,7 @@
       hostConfiguration
       hostDisk
       system
+      laptop
       home-manager
       shell
       desktop

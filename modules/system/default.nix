@@ -19,9 +19,7 @@
       networking
       bootloader
       kmscon
-      tlp
       audio
-      zip
     ];
   in {
     imports = modules;
