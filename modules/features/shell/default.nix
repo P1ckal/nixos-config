@@ -12,6 +12,7 @@
       ripgrep
       yazi
       git
+      btop
     ];
   };
 
