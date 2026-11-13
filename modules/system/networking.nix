@@ -15,7 +15,7 @@
         "8.8.8.8"
       ];
       # disable firewall
-      firewall.enable = false;
+      # firewall.enable = false;
     };
 
     # Disable "wait-online" target, makes connecting to network

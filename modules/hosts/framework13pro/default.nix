@@ -24,6 +24,7 @@
       nix-dev
       game-design
       python-dev
+      tailscale
     ];
   };
 }
