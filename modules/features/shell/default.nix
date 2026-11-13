@@ -22,6 +22,7 @@
       fish
       lazygit
       git
+      zip
     ];
     home-manager.sharedModules = [ self.modules.homeManager.shell ];
   };
