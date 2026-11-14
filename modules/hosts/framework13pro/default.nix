@@ -16,6 +16,7 @@
       home-manager
       shell
       desktop
+      tofi
       zen-browser
       discord
       minecraft

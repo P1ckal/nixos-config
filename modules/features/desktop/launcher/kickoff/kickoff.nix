@@ -1,4 +1,4 @@
-{ ... }: {
+{ self, ... }: {
   flake.modules.homeManager.kickoff =
     {
       config,
@@ -15,6 +15,7 @@
       );
 
       launcher = pkgs.writeShellScriptBin "launcher" ''
+        ${pkgs.procps}/bin/pkill 'kickoff' && exit 0
         hist="''${XDG_CACHE_HOME:-$HOME/.cache}/kickoff"
         mkdir -p "$hist"
         exec ${lib.getExe pkgs.kickoff} --from-file ${entriesFile} \
@@ -45,4 +46,8 @@
 
       home.packages = [ launcher ];
     };
+
+  flake.nixosModules.kickoff = { ... }: {
+    home-manager.sharedModules = [ self.modules.homeManager.kickoff ];
+  };
 }

@@ -4,7 +4,6 @@
     imports = with self.modules.homeManager; [
       niri
       kitty
-      kickoff
       noctalia
     ];
     
