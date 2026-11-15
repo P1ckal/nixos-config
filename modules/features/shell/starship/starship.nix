@@ -1,6 +1,12 @@
 { ... }: {
   flake.modules.homeManager.starship = { pkgs, ...}: {
-    home.packages = [ pkgs.starship ];
-    xdg.configFile."starship.toml".source = ./config/starship.toml;
+    programs.starship = {
+      enable = true;
+      presets = ["bracketed-segments"];
+      settings = {
+        
+      };
+      enableFishIntegration = true;
+    };
   };
 }
