@@ -19,6 +19,7 @@
     }:
     let
       entries = config.launcher.entries;
+      c = config.theme.colors;
       names = lib.attrNames entries;
 
       cases = lib.concatStringsSep "\n" (
@@ -76,15 +77,15 @@
           )
         '';
 
-        # Same palette as your old kickoff setup.
+        # Colors from config.theme.colors.
         extraCss = ''
-          @define-color accent #ff8cb3;
-          @define-color bg-color #1a0f16;
-          @define-color fg-color #7897b3;
-          @define-color desc-color #ff8cb3;
+          @define-color accent ${c.mPrimary};
+          @define-color bg-color ${c.mSurface};
+          @define-color fg-color ${c.mOnSurface};
+          @define-color desc-color ${c.mPrimary};
 
           label.match {
-            color: #ff8cb3;
+            color: ${c.mPrimary};
           }
         '';
       };

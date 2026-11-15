@@ -12,6 +12,7 @@
     }:
     let
       entries = config.launcher.entries;
+      c = config.theme.colors;
 
       # attrNames is alphabetical; tofi's history sorts by usage on top of this.
       names = lib.attrNames entries;
@@ -82,13 +83,14 @@
           font-size = 16;
 
           # --- colors ---
-          background-color = "#1f1a23cc";
-          border-color = "#ff8cb3";
-          text-color = "#f2f2f3ff";
-          prompt-color = "#bb77b8ff";
-          input-color = "#a888c4ff";
-          selection-color = "#a888c480";
-          selection-background = "#00000000";
+          # From config.theme.colors; the trailing two hex digits are alpha.
+          background-color = "${c.mSurface}cc";
+          border-color = "${c.mPrimary}ff"; # unused while border-width = 0
+          text-color = "${c.mOnSurface}ff";
+          prompt-color = "${c.mSecondary}ff";
+          input-color = "${c.mPrimary}ff";
+          selection-color = "${c.mPrimary}80";
+          selection-background = "#00000000"; # fully transparent
 
           # --- other ---
         };

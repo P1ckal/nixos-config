@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  flake.modules.homeManager.noctalia = { ... }: {
+  flake.modules.homeManager.noctalia = { config, ... }: {
     imports = [
       inputs.noctalia.homeModules.default
     ];
@@ -7,6 +7,9 @@
     programs.noctalia = {
       enable = true;
       systemd.enable = true;
+
+      # Written to ~/.config/noctalia/palettes/<name>.json
+      customPalettes = config.theme.palettes;
 
       settings = {
         hooks.started = "kitty --start-as=hidden --listen-on=unix:@kitty";
@@ -19,11 +22,15 @@
         };
 
         theme = {
-          builtIn = "Noctalia";
-          mode = "dark";
-          source = "wallpaper";
-          community-palette = "Oxocarbon";
-          wallpaper_scheme = "soft";
+          # The palette comes from modules/theme/_palettes/, registered
+          # above via `customPalettes`. noctalia themes the apps in
+          # builtin_ids/community_ids from it. kitty and niri are deliberately
+          # NOT in the list: their colors are generated straight from the
+          # palette in kitty.nix / niri.nix (noctalia can't write over
+          # home-manager's read-only files anyway).
+          source = "custom";
+          custom_palette = config.theme.name;
+          mode = config.theme.mode;
 
           templates = {
             builtin_ids = [
@@ -31,8 +38,6 @@
               "cava"
               "gtk3"
               "gtk4"
-              "kitty"
-              "niri"
               "qt"
             ];
             community_ids = [

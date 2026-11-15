@@ -7,6 +7,8 @@
       ...
     }:
     let
+      c = config.theme.colors;
+
       entriesFile = pkgs.writeText "kickoff-entries" (
         lib.concatStringsSep "\n" (
           lib.mapAttrsToList (name: cmd: "${name} = ${cmd}") config.launcher.entries
@@ -33,13 +35,13 @@
 
           history.decrease_interval = 24;
 
+          # From config.theme.colors; the trailing two hex digits are alpha.
           colors = {
-            # somehow this needs to actually take from the noctalia colors...
-            background = "#1a0f16aa";
-            prompt = "#ff8cb3ff";
-            text = "#ff8cb3ff"; # for search results
-            text_query = "#7897b3ff"; # for the search query
-            text_selected = "#7897b3ff"; # for the currently selected result
+            background = "${c.mSurface}aa";
+            prompt = "${c.mPrimary}ff";
+            text = "${c.mPrimary}ff"; # for search results
+            text_query = "${c.mOnSurface}ff"; # for the search query
+            text_selected = "${c.mOnSurface}ff"; # for the currently selected result
           };
         };
       };

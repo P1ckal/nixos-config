@@ -5,7 +5,10 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      sharedModules = [ self.modules.homeManager.launcher-options ];
+      sharedModules = with self.modules.homeManager; [
+        launcher-options
+        theme
+      ];
       users.sevyn.home.stateVersion = "26.05";
     };
   };
