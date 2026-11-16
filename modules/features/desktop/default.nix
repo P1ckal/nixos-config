@@ -5,14 +5,16 @@
       niri
       kitty
       noctalia
+      clipboard
     ];
-    
+
   };
 
   # System side: only niri has a NixOS half
   flake.nixosModules.desktop = {
     imports = with self.nixosModules; [
-      niri greetd
+      niri
+      greetd
     ];
     home-manager.sharedModules = [ self.modules.homeManager.desktop ];
     networking.networkmanager.enable = true;
