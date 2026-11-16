@@ -1,6 +1,6 @@
 # modules/theme/theme.nix
 #
-# Exposes the palettes in ./_palettes/ to every home-manager module.
+# Exposes the palettes in ./_palettes/ to every NixOS and home-manager module.
 #
 # One file per palette: ./_palettes/<name>.nix is picked up automatically and
 # becomes `theme.name = "<name>"`. No registration needed. (The underscore on
@@ -12,17 +12,23 @@
 #   config.theme.colors   the active palette for that mode (read-only)
 #   config.theme.palettes every palette, both modes (read-only)
 #
-# Usage in any home-manager module:
+# It is defined for BOTH module systems (flake.nixosModules.theme and
+# flake.modules.homeManager.theme), so `config.theme.colors` works in NixOS
+# modules (greetd, boot splash, ...) and in home-manager modules alike. The
+# choice is made once, on the NixOS side; home-manager.nix forwards it.
+#
+# Usage in any module:
 #   { config, ... }: let c = config.theme.colors; in {
 #     programs.foo.settings.background = c.mSurface;
 #   }
 #
-# It is added to home-manager.sharedModules in modules/home/home-manager.nix,
-# so it is available everywhere. To use another palette, set `theme.name`
-# (e.g. from a host module via
-# `home-manager.sharedModules = [ { theme.name = "catppuccin"; } ];`).
-{ ... }: {
-  flake.modules.homeManager.theme = { config, lib, ... }:
+# modules/home/home-manager.nix imports the NixOS side and adds the
+# home-manager side to sharedModules. To use another palette, set `theme.name`
+# (and optionally `theme.mode`) in a host module, e.g. `theme.name = "catppuccin";`.
+{ ... }:
+let
+  # Plain option module: works unchanged in both NixOS and home-manager.
+  themeModule = { config, lib, ... }:
     let
       # Every <name>.nix in ./_palettes becomes a palette called <name>.
       palettes = lib.mapAttrs' (file: _: lib.nameValuePair (lib.removeSuffix ".nix" file) (import (./_palettes + "/${file}")))
@@ -58,4 +64,8 @@
 
       config.theme.colors = palettes.${config.theme.name}.${config.theme.mode};
     };
+in
+{
+  flake.modules.homeManager.theme = themeModule;
+  flake.nixosModules.theme = themeModule;
 }

@@ -27,9 +27,7 @@
       python-dev
       tailscale
 
-      {
-        home-manager.sharedModules = [ { theme.name = "pixel-purple"; } ];
-      }
+      { theme.name = "pixel-purple"; }
 
     ];
   };
