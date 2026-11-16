@@ -76,6 +76,8 @@
         plugins = {
           enabled = [ "noctalia/screen_recorder" ];
         };
+
+        brightness.minimum_brightness = 0.01;
       };
     };
   };
