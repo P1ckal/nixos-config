@@ -1,11 +1,26 @@
 { ... }: {
-  flake.modules.homeManager.kitty = { config, lib, pkgs, ... }:
+  flake.modules.homeManager.kitty =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       c = config.theme.colors;
       t = c.terminal;
 
       # color0..7 are the normal ANSI colors, color8..15 the bright ones.
-      ansiNames = [ "black" "red" "green" "yellow" "blue" "magenta" "cyan" "white" ];
+      ansiNames = [
+        "black"
+        "red"
+        "green"
+        "yellow"
+        "blue"
+        "magenta"
+        "cyan"
+        "white"
+      ];
       ansi = lib.listToAttrs (
         lib.imap0 (i: color: lib.nameValuePair "color${toString i}" color) (
           map (n: t.normal.${n}) ansiNames ++ map (n: t.bright.${n}) ansiNames
@@ -28,7 +43,9 @@
           listen_on = "unix:@kitty";
 
           shell_integration = "enabled";
-        } // ansi // {
+        }
+        // ansi
+        // {
           # --- colors (from config.theme.colors) ---
           cursor = t.cursor;
           cursor_text_color = t.cursorText;
