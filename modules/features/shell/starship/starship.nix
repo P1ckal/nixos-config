@@ -1,11 +1,15 @@
-{ ... }: {
-  flake.modules.homeManager.starship = { pkgs, ...}: {
+{ self, ... }: {
+  flake.wrappers.starship = { wlib, ... }: {
+    imports = [ wlib.wrapperModules.starship ];
+
+    preset = [ "bracketed-segments" ];
+    settings = { };
+  };
+
+  flake.modules.homeManager.starship = { pkgs, ... }: {
     programs.starship = {
       enable = true;
-      presets = ["bracketed-segments"];
-      settings = {
-        
-      };
+      package = self.packages.${pkgs.stdenv.hostPlatform.system}.starship;
       enableFishIntegration = true;
     };
   };
