@@ -68,4 +68,5 @@ in
 {
   flake.modules.homeManager.theme = themeModule;
   flake.nixosModules.theme = themeModule;
+  flake.modules.generic.theme = themeModule;
 }
