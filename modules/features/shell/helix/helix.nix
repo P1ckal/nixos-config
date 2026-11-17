@@ -1,14 +1,16 @@
 { self, ... }: {
   flake.wrappers.helix =
     {
-      lib,
       wlib,
-      pkgs,
       ...
     }:
     let
-      toml = pkgs.formats.toml { };
-
+      darker = "#292929";
+      selection = "#37232D";
+      selectionFG = "#F2AAC7";
+    in
+    {
+      imports = [ wlib.wrapperModules.helix ];
       settings = {
         theme = "carbonfox-extra";
         editor = {
@@ -41,12 +43,8 @@
             "A-x" = "extend_to_line_bounds";
           };
         };
-
       };
 
-      darker = "#292929";
-      selection = "#37232D";
-      selectionFG = "#F2AAC7";
       themes.carbonfox-extra = {
         inherits = "carbonfox";
 
@@ -66,34 +64,11 @@
           fg = selectionFG;
           modifiers = [ "underlined" ];
         };
+
+        "palette" = {
+          darker = darker;
+        };
       };
-
-      configFile = toml.generate "helix-config.toml" settings;
-
-      themesDir = pkgs.runCommand "helix-themes" { } ''
-        mkdir -p $out/themes
-        ${lib.concatStringsSep "\n" (
-          lib.mapAttrsToList (name: theme: ''
-            cp ${toml.generate "${name}.toml" theme} $out/themes/${name}.toml
-          '') themes
-        )}
-      '';
-
-      # helix's own runtime plus your themes; HELIX_RUNTIME replaces the default runtime
-      runtime = pkgs.symlinkJoin {
-        name = "helix-runtime";
-        paths = [
-          pkgs.helix.runtime
-          themesDir
-        ];
-      };
-
-    in
-    {
-      imports = [ wlib.modules.default ];
-      config.package = pkgs.helix-unwrapped;
-      config.flags."--config" = "${configFile}";
-      config.env.HELIX_RUNTIME = "${runtime}";
     };
 
   flake.modules.homeManager.helix = { pkgs, ... }: {

@@ -7,6 +7,7 @@
     {
       config,
       wlib,
+      lib,
       ...
     }:
     let
@@ -18,7 +19,7 @@
         self.modules.generic.theme
       ];
 
-      settings = {
+      settings = lib.mapAttrs (_: lib.mkDefault) {
         # --- behaviour ---
         fuzzy-match = true;
         require-match = true;
