@@ -34,8 +34,6 @@
 
           templates = {
             builtin_ids = [
-              "btop"
-              "cava"
               "gtk3"
               "gtk4"
               "qt"
