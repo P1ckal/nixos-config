@@ -3,6 +3,62 @@
 # Curated launcher: tofi in dmenu mode, fed from config.launcher.entries.
 # Only what you list in launcher.entries shows up (no .desktop / $PATH scan).
 { self, ... }: {
+  flake.wrappers.tofi =
+    {
+      config,
+      wlib,
+      ...
+    }:
+    let
+      c = config.theme.colors;
+    in
+    {
+      imports = [
+        wlib.wrapperModules.tofi
+        self.modules.generic.theme
+      ];
+
+      settings = {
+        # --- behaviour ---
+        fuzzy-match = true;
+        require-match = true;
+        history = true;
+        # hint-font = false is faster at startup (slightly rougher glyph
+        # positioning). Flip to true if text looks off.
+        hint-font = false;
+        ascii-input = true;
+
+        # --- layout ---
+        anchor = "center";
+        width = "100%";
+        height = "100%";
+        num-results = 8;
+        result-spacing = 25;
+        padding-top = "35%";
+        # padding-bottom = "35%";
+        padding-left = "35%";
+        # padding-right = 20;
+        prompt-text = "run: ";
+        corner-radius = 12;
+        border-width = 0;
+        outline-width = 0;
+
+        # --- font ---
+        font = "monospace";
+        font-size = 16;
+
+        # --- colors ---
+        background-color = "${c.mSurface}cc";
+        text-color = "${c.mOnSurface}ff";
+        prompt-color = "${c.mSecondary}ff";
+        input-color = "${c.mPrimary}ff";
+        selection-color = "${c.mPrimary}80";
+        selection-background = "#00000000";
+
+        # --- other ---
+      };
+    };
+
   flake.modules.homeManager.tofi =
     {
       config,
@@ -11,13 +67,14 @@
       ...
     }:
     let
-      entries = config.launcher.entries;
-      c = config.theme.colors;
+      tofi = self.wrappers.tofi.wrap {
+        inherit pkgs;
+        theme = { inherit (config.theme) name mode; };
+      };
 
-      # attrNames is alphabetical; tofi's history sorts by usage on top of this.
+      entries = config.launcher.entries;
       names = lib.attrNames entries;
 
-      # One case arm per entry: 'Name') cmd='command' ;;
       cases = lib.concatStringsSep "\n" (
         lib.mapAttrsToList (
           name: cmd: "  ${lib.escapeShellArg name}) cmd=${lib.escapeShellArg cmd} ;;"
@@ -35,7 +92,7 @@
         # --history-file makes tofi sort frequently used entries first,
         # even in dmenu mode.
         choice=$(printf '%s\n' ${lib.escapeShellArgs names} \
-          | ${pkgs.tofi}/bin/tofi --history-file "$hist/history") || exit 0
+          | ${lib.getExe tofi} --history-file "$hist/history") || exit 0
 
         case "$choice" in
         ${cases}
@@ -48,55 +105,10 @@
       '';
     in
     {
-      programs.tofi = {
-        enable = true;
-
-        settings = {
-          # --- behaviour ---
-          matching-algorithm = "fuzzy";
-          require-match = true;
-          history = true;
-          # hint-font = false is faster at startup (slightly rougher glyph
-          # positioning). Flip to true if text looks off.
-          hint-font = false;
-          ascii-input = true;
-
-          # --- layout ---
-          anchor = "center";
-          width = "100%";
-          height = "100%";
-          num-results = 8;
-          result-spacing = 25;
-          padding-top = "35%";
-          # padding-bottom = "35%";
-          padding-left = "35%";
-          # padding-right = 20;
-          prompt-text = "run: ";
-          corner-radius = 12;
-          border-width = 0;
-          outline-width = 0;
-
-          # --- font ---
-          # Set this explicitly instead of letting fontconfig pick.
-          # Swap for any family `fc-list : family` shows you.
-          font = "monospace";
-          font-size = 16;
-
-          # --- colors ---
-          # From config.theme.colors; the trailing two hex digits are alpha.
-          background-color = "${c.mSurface}cc";
-          border-color = "${c.mPrimary}ff"; # unused while border-width = 0
-          text-color = "${c.mOnSurface}ff";
-          prompt-color = "${c.mSecondary}ff";
-          input-color = "${c.mPrimary}ff";
-          selection-color = "${c.mPrimary}80";
-          selection-background = "#00000000"; # fully transparent
-
-          # --- other ---
-        };
-      };
-
-      home.packages = [ launcher ];
+      home.packages = [
+        tofi
+        launcher
+      ];
     };
 
   flake.nixosModules.tofi = { ... }: {
