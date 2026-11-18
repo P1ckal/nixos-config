@@ -1,9 +1,9 @@
-{ ... }: {
-  flake.modules.homeManager.kitty =
+{ self, ... }: {
+  flake.wrappers.kitty =
     {
       config,
+      wlib,
       lib,
-      pkgs,
       ...
     }:
     let
@@ -28,41 +28,54 @@
       );
     in
     {
-      launcher.entries."Kitty" = lib.getExe pkgs.kitty;
+      imports = [
+        wlib.wrapperModules.kitty
+        self.modules.generic.theme
+      ];
 
-      programs.kitty = {
-        enable = true;
-        settings = {
-          cursor_shape = "beam";
+      env.KITTY_CONFIG_DIRECTORY = "/var/empty";
 
-          touch_scroll_multiplier = 5.0;
+      settings = {
+        cursor_shape = "beam";
 
-          confirm_os_window_close = 0;
+        touch_scroll_multiplier = 5.0;
 
-          allow_remote_control = "socket";
-          listen_on = "unix:@kitty";
+        confirm_os_window_close = 0;
 
-          shell_integration = "enabled";
-        }
-        // ansi
-        // {
-          # --- colors (from config.theme.colors) ---
-          cursor = t.cursor;
-          cursor_text_color = t.cursorText;
-          background = t.background;
-          foreground = t.foreground;
-          selection_foreground = t.selectionFg;
-          selection_background = t.selectionBg;
-          active_border_color = c.mPrimary;
-          inactive_border_color = c.mSurfaceVariant;
-          url_color = c.mPrimary;
+        allow_remote_control = "socket";
+        listen_on = "unix:@kitty";
 
-          active_tab_foreground = c.mOnPrimary;
-          active_tab_background = c.mPrimary;
-          inactive_tab_foreground = c.mOnSurfaceVariant;
-          inactive_tab_background = c.mSurfaceVariant;
-          cursor_trail_color = c.mOnSurfaceVariant;
-        };
+        shell_integration = "enabled";
+      }
+      // ansi
+      // {
+        # --- colors (from config.theme.colors) ---
+        cursor = t.cursor;
+        cursor_text_color = t.cursorText;
+        background = t.background;
+        foreground = t.foreground;
+        selection_foreground = t.selectionFg;
+        selection_background = t.selectionBg;
+        active_border_color = c.mPrimary;
+        inactive_border_color = c.mSurfaceVariant;
+        url_color = c.mPrimary;
+
+        active_tab_foreground = c.mOnPrimary;
+        active_tab_background = c.mPrimary;
+        inactive_tab_foreground = c.mOnSurfaceVariant;
+        inactive_tab_background = c.mSurfaceVariant;
+        cursor_trail_color = c.mOnSurfaceVariant;
       };
+    };
+  flake.modules.homeManager.kitty =
+    {
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      home.packages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.kitty ];
+
+      launcher.entries."Kitty" = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.kitty;
     };
 }
