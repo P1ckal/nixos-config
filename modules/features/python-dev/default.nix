@@ -2,7 +2,6 @@
   # Home side: everything the user gets for the python-dev
   flake.modules.homeManager.python-dev = {
     imports = with self.modules.homeManager; [
-      ruff
       uv
       ty
     ];
@@ -13,6 +12,7 @@
   flake.nixosModules.python-dev = {
     imports = with self.nixosModules; [
       uv
+      ruff
     ];
     home-manager.sharedModules = [ self.modules.homeManager.python-dev ];
   };
