@@ -85,7 +85,27 @@
       };
     };
 
-  flake.modules.homeManager.noctalia = { pkgs, ... }: {
-    home.packages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia ];
-  };
+  flake.modules.homeManager.noctalia =
+    { config, pkgs, ... }:
+    let
+      noctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia;
+    in
+    {
+      home.packages = [ noctalia ];
+
+      # nabbed from noctalia's hm module
+      systemd.user.services.noctalia = {
+        Unit = {
+          Description = "Noctalia - A lightweight Wayland shell and bar";
+          Documentation = "https://docs.noctalia.dev/noctalia/";
+          PartOf = [ config.wayland.systemd.target ];
+          After = [ config.wayland.systemd.target ];
+        };
+        Service = {
+          ExecStart = "${noctalia}/bin/noctalia";
+          Restart = "on-failure";
+        };
+        Install.WantedBy = [ config.wayland.systemd.target ];
+      };
+    };
 }

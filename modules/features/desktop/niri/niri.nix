@@ -113,8 +113,6 @@
 
         };
 
-        spawn-at-startup = [ "noctalia" ];
-
         hotkey-overlay.skip-at-startup = _: { };
         prefer-no-csd = _: { };
         screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
