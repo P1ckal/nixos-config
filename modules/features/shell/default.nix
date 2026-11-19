@@ -4,8 +4,6 @@
     imports = with self.modules.homeManager; [
       helix
       starship
-      zoxide
-      direnv
       devenv
       hyfetch
       ripgrep
@@ -18,11 +16,13 @@
   # System side
   flake.nixosModules.shell = {
     imports = with self.nixosModules; [
+      direnv
       fish
       starship
       lazygit
       git
       zip
+      zoxide
     ];
     home-manager.sharedModules = [ self.modules.homeManager.shell ];
   };
