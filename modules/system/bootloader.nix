@@ -1,6 +1,7 @@
 {...}: {
   # Define flake part nixosModule "bootloader" and pass in pkgs
   flake.nixosModules.bootloader = {pkgs, ...}: {
+    # secure boot
     environment.systemPackages = with pkgs; [ sbctl ];
     # Normal nix code
     boot = {

@@ -2,7 +2,6 @@
   # Home side
   flake.modules.homeManager.shell = {
     imports = with self.modules.homeManager; [
-      fish
       helix
       starship
       zoxide
@@ -20,6 +19,7 @@
   flake.nixosModules.shell = {
     imports = with self.nixosModules; [
       fish
+      starship
       lazygit
       git
       zip

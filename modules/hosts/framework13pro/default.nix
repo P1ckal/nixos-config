@@ -37,6 +37,11 @@
             };
           }
         ];
+        my.fish.modules = [
+          {
+            shellAliases.rebuild = "sudo nixos-rebuild switch --flake ~/nixos#framework13pro $argv";
+          }
+        ];
       }
     ];
 

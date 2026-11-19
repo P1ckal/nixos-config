@@ -40,5 +40,11 @@
       config.flake.wrappers.lazygit.install
     ];
     wrappers.lazygit.enable = lib.mkDefault true;
+
+    my.fish.modules = [
+      {
+        shellAliases.lg = "lazygit $argv";
+      }
+    ];
   };
 }
