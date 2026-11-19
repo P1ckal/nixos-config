@@ -1,15 +1,20 @@
-{ inputs, ... }: {
-  flake.modules.homeManager.noctalia = { config, ... }: {
-    imports = [
-      inputs.noctalia.homeModules.default
-    ];
+{ self, inputs, ... }: {
+  flake.wrappers.noctalia =
+    {
+      config,
+      wlib,
+      pkgs,
+      ...
+    }:
+    {
+      imports = [
+        wlib.wrapperModules.noctalia
+        self.modules.generic.theme
+      ];
+      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-    programs.noctalia = {
-      enable = true;
-      systemd.enable = true;
-
-      # Written to ~/.config/noctalia/palettes/<name>.json
-      customPalettes = config.theme.palettes;
+      # colors = palette;
+      colors = config.theme.palettes.${config.theme.name};
 
       settings = {
         hooks.started = "kitty --start-as=hidden --listen-on=unix:@kitty";
@@ -22,14 +27,9 @@
         };
 
         theme = {
-          # The palette comes from modules/theme/_palettes/, registered
-          # above via `customPalettes`. noctalia themes the apps in
-          # builtin_ids/community_ids from it. kitty and niri are deliberately
-          # NOT in the list: their colors are generated straight from the
-          # palette in kitty.nix / niri.nix (noctalia can't write over
-          # home-manager's read-only files anyway).
           source = "custom";
-          custom_palette = config.theme.name;
+          # required naming convention for the wrapper
+          custom_palette = "custom";
           mode = config.theme.mode;
 
           templates = {
@@ -63,7 +63,13 @@
 
         lockscreen = {
           fingerprint = true;
-          transition = [ "honeycomb" "melt" "pixel" "stripes" "vortex" ];
+          transition = [
+            "honeycomb"
+            "melt"
+            "pixel"
+            "stripes"
+            "vortex"
+          ];
           transition_duration = 1000;
         };
 
@@ -78,5 +84,8 @@
         brightness.minimum_brightness = 0.01;
       };
     };
+
+  flake.modules.homeManager.noctalia = { pkgs, ... }: {
+    home.packages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia ];
   };
 }
