@@ -27,8 +27,18 @@
       python-dev
       tailscale
 
-      { theme.name = "pixel-purple"; }
-
+      {
+        theme.name = "pixel-purple";
+        my.niri.modules = [
+          {
+            settings.outputs."eDP-1" = {
+              mode = "2880x1920@120";
+              scale = 1.5;
+            };
+          }
+        ];
+      }
     ];
+
   };
 }

@@ -34,11 +34,6 @@
           };
         };
 
-        outputs."eDP-1" = {
-          mode = "1920x1080@120";
-          scale = 1.5;
-        };
-
         cursor = {
           xcursor-theme = "default";
           xcursor-size = 48;
@@ -364,11 +359,28 @@
         ];
       };
     };
-  flake.nixosModules.niri = { pkgs, ... }: {
-    programs.niri = {
-      enable = true;
-      package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
+  flake.nixosModules.niri =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    let
+      base = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
+      niri = base.wrap ([ { theme.name = config.theme.name; } ] ++ config.my.niri.modules);
+    in
+    {
+      options.my.niri.modules = lib.mkOption {
+        type = lib.types.listOf lib.types.deferredModule;
+        default = [ ];
+      };
+      config = {
+        programs.niri = {
+          enable = true;
+          package = niri;
+        };
+        environment.systemPackages = with pkgs; [ xwayland-satellite ];
+      };
     };
-    environment.systemPackages = with pkgs; [ xwayland-satellite ];
-  };
 }

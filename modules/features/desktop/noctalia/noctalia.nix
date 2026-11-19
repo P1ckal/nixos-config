@@ -2,6 +2,7 @@
   flake.wrappers.noctalia =
     {
       config,
+      lib,
       wlib,
       pkgs,
       ...
@@ -16,7 +17,7 @@
       # colors = palette;
       colors = config.theme.palettes.${config.theme.name};
 
-      settings = {
+      settings = lib.mapAttrsRecursive (_: lib.mkDefault) {
         hooks.started = "kitty --start-as=hidden --listen-on=unix:@kitty";
 
         bar = {
@@ -86,26 +87,39 @@
     };
 
   flake.modules.homeManager.noctalia =
-    { config, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
-      noctalia = self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia;
+      cfg = config.my.noctalia;
+      base = self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia;
+      noctalia = base.wrap { settings = cfg.settings; };
     in
     {
-      home.packages = [ noctalia ];
+      options.my.noctalia.settings = lib.mkOption {
+        type = (pkgs.formats.toml { }).type;
+        default = { };
+      };
+      config = {
+        home.packages = [ noctalia ];
 
-      # nabbed from noctalia's hm module
-      systemd.user.services.noctalia = {
-        Unit = {
-          Description = "Noctalia - A lightweight Wayland shell and bar";
-          Documentation = "https://docs.noctalia.dev/noctalia/";
-          PartOf = [ config.wayland.systemd.target ];
-          After = [ config.wayland.systemd.target ];
+        # nabbed from noctalia's hm module
+        systemd.user.services.noctalia = {
+          Unit = {
+            Description = "Noctalia - A lightweight Wayland shell and bar";
+            Documentation = "https://docs.noctalia.dev/noctalia/";
+            PartOf = [ config.wayland.systemd.target ];
+            After = [ config.wayland.systemd.target ];
+          };
+          Service = {
+            ExecStart = "${noctalia}/bin/noctalia";
+            Restart = "on-failure";
+          };
+          Install.WantedBy = [ config.wayland.systemd.target ];
         };
-        Service = {
-          ExecStart = "${noctalia}/bin/noctalia";
-          Restart = "on-failure";
-        };
-        Install.WantedBy = [ config.wayland.systemd.target ];
       };
     };
 }
