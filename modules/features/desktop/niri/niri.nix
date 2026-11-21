@@ -357,6 +357,12 @@
             open-focused = true;
           }
         ];
+
+        gestures = {
+          hot-corners = {
+            off = _: { };
+          };
+        };
       };
     };
   flake.nixosModules.niri =
