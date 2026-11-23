@@ -6,8 +6,21 @@
     settings = { };
   };
 
-  flake.modules.homeManager.starship =
+  flake.modules.fish.starship =
     { pkgs, lib, ... }:
+    let
+      starship = self.packages.${pkgs.stdenv.hostPlatform.system}.starship;
+    in
+    {
+      configFile.content = lib.mkAfter ''
+        if status is-interactive
+          ${lib.getExe starship} init fish | source
+        end
+      '';
+    };
+
+  flake.modules.homeManager.starship =
+    { pkgs, ... }:
     let
       starship = self.packages.${pkgs.stdenv.hostPlatform.system}.starship;
     in
@@ -19,20 +32,7 @@
       };
 
     };
-  flake.nixosModules.starship =
-    { pkgs, lib, ... }:
-    let
-      starship = self.packages.${pkgs.stdenv.hostPlatform.system}.starship;
-    in
-    {
-      my.fish.modules = [
-        {
-          configFile.content = lib.mkAfter ''
-            if status is-interactive
-              ${lib.getExe starship} init fish | source
-            end
-          '';
-        }
-      ];
-    };
+  flake.nixosModules.starship = { ... }: {
+    my.fish.modules = [ self.modules.fish.starship ];
+  };
 }

@@ -71,6 +71,12 @@
       };
     };
 
+  flake.modules.fish.helix = { lib, ... }: {
+    configFile.content = lib.mkAfter ''
+      set -gx EDITOR hx
+    '';
+  };
+
   flake.modules.homeManager.helix = { pkgs, ... }: {
     home.packages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.helix ];
     home.sessionVariables.EDITOR = "hx";

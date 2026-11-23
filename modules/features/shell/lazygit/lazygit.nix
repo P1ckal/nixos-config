@@ -1,4 +1,4 @@
-{ config, ... }:
+{ self, config, ... }:
 {
   flake.wrappers.lazygit =
     {
@@ -35,16 +35,17 @@
       };
 
     };
+
+  flake.modules.fish.lazygit = { ... }: {
+    shellAliases.lg = "lazygit $argv";
+  };
+
   flake.nixosModules.lazygit = { lib, ... }: {
     imports = [
       config.flake.wrappers.lazygit.install
     ];
     wrappers.lazygit.enable = lib.mkDefault true;
 
-    my.fish.modules = [
-      {
-        shellAliases.lg = "lazygit $argv";
-      }
-    ];
+    my.fish.modules = [ self.modules.fish.lazygit ];
   };
 }
