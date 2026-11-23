@@ -62,7 +62,13 @@
       ];
 
       plugins = [ ];
-      configFile.content = lib.mkBefore themeLines;
+
+      # unset private mode so history works
+      configFile.content = ''
+        set -e fish_private_mode
+        set -g fish_history fish
+        ${themeLines}
+      '';
 
       shellAliases = lib.mapAttrs (_: lib.mkDefault) {
       };
